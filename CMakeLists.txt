@@ -3,5 +3,5 @@ project(aghacks)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp python_scraper.cpp python_scraper.h)
 add_executable(aghacks ${SOURCE_FILES})
