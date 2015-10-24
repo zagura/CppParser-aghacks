@@ -18,6 +18,8 @@ using std::string;
 using std::unique_ptr;
 using std::vector;
 
+extern string split_with_char(vector<string> list, char character = {' '});
+
 class sql_manager {
 private:
 public:
