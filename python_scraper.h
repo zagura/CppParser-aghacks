@@ -15,15 +15,53 @@ public:
     python_scraper(const char* link);
     ~python_scraper();
     string scrape();
+    //name: python script name
+    //func: python calling function name
+    //link: link given as an argument to python function
 private:
-    PyObject *pName, *pModule, *pDict, *pFunc;
-    PyObject *pLink, *pValue;
-
-
-
+    PyObject *pModule, *pFunc;
+    PyObject *pLink, *pResult;
+    PyObject *pArg;
+    const char* name = "getpage";  //Python module name
+    const char* func = "readIt";   //Python module main function
 
 
 };
+namespace exception_scraper {
+    class scraper_exception {
+    public:
+        string message;
+        string details;
 
+        scraper_exception() { };
+        scraper_exception(string d, string m = static_cast<string>("None")): message(m), details(d){};
+        scraper_exception(void* v, string m = static_cast<string>("Unknown exception")){
+            if (v == NULL) {
+                details = "null pointer";
+            }
+            else {
+                details="Critical error!";
+            }
+        };
+    };
 
+    class bad_name : public scraper_exception {
+    public:
+        bad_name(string d):scraper_exception(d,static_cast<string>("Bad name exception")){};
+        bad_name(void* v):scraper_exception(v,static_cast<string>("Bad name exception")){};
+    };
+
+    class bad_module : public scraper_exception {
+    public:
+        bad_module(string d):scraper_exception(d,static_cast<string>("Bad module exception")){};
+        bad_module(void* v):scraper_exception(v,static_cast<string>("Bad module exception")){};
+    };
+    class bad_function : public scraper_exception{
+    public:
+        string message = static_cast<string>("Bad function exception");
+        bad_function(string d):scraper_exception(d, static_cast<string>("Bad function exception")){};
+        bad_function(void* v):scraper_exception(v, static_cast<string>("Bad function exception")){};
+    };
+
+}
 #endif //AGHACKS_PYTHON_SCRAPER_H
