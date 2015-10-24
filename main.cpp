@@ -17,7 +17,7 @@ using namespace std::chrono;
 
 void acquire_url();
 void load_url_address();
-void scrape_webpage();
+void scrape_webpage(const char* link );
 
 
 queue<string> url_addresses{};
@@ -51,13 +51,17 @@ void acquire_url()
             lock.unlock();
             url_condition.notify_one();
 
-        thread t {scrape_webpage, url.c_str()};
+        thread t {&scrape_webpage, url.c_str()};
+        t.detach();
     }
 }
 void scrape_webpage(const char* link )
 {
-    python_scraper scraper(link);
+    string str = link;
+    python_scraper scraper(str.c_str());
     string result = scraper.scrape();
+
+    //call parser(result)
 }
 
 int main(int argc, char** argv)
