@@ -10,21 +10,24 @@
 #include <prepared_statement.h>
 #include <statement.h>
 #include <string>
+#include <vector>
 #include <memory>
 
 
 using std::string;
 using std::unique_ptr;
+using std::vector;
 
 class sql_manager {
 private:
+public:
     friend class sql_model;
 
     sql_manager();
     ~sql_manager();
 
-    const string get_row_by_line_number(const string line, const string column_name, const string table_name);
-    void insert_row(const string table_name,const string column_name, const string &text_inserted);
+    const string get_column_by_line_number(const string line, const string column_name, const string table_name);
+    void insert_row(const string table_name,const vector<string>& column_name, const vector<string> &text_inserted);
 
     sql::mysql::MySQL_Driver*driver;
     sql::Connection*connection;

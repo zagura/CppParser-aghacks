@@ -1,8 +1,11 @@
 #include <iostream>
+#include "sql_manager.h"
 
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
+    sql_manager manager;
+
+
     return 0;
 }
