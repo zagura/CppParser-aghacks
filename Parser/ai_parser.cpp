@@ -46,7 +46,7 @@ void ai_parser::parse_offer() {
         text=tmp;
         while(regex_search(text, matches, x)) {
             if (matches[1].matched) {
-                result += matches[1].str()+" ";
+                result += matches[1].str()+"\n";
                 text=matches.suffix().str();
             }
         }
