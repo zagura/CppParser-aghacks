@@ -9,14 +9,15 @@ sql_manager::sql_manager(): database_address{"localhost"}, database_username{"te
                             database_password{"123abc"}, database_name{"tanie_danie"} {
 
     driver = sql::mysql::get_mysql_driver_instance();
+    driver->threadInit();
     connection = driver -> connect(database_address,database_username,database_password);
     connection->setSchema(database_name);
 }
 
 sql_manager::~sql_manager() {
     delete connection;
+    driver->threadEnd();
 }
-
 const string sql_manager::get_column_by_line_number(const string line, const string column_name, const string table_name) {
     unique_ptr<sql::Statement> statement {connection->createStatement()};
     string statement_str {"SELECT "+column_name+" FROM "+table_name+" ORDER BY updated_at limit "+line+",1"};
@@ -46,8 +47,7 @@ void sql_manager::insert_row(const string table_name,const vector<string>& colum
             "INSERT INTO " + table_name + " (" + splitted_column_names + ") VALUES (" + splitted_values + ")"
                     " ON DUPLICATE KEY UPDATE "
             + update_values_with_column_names;
-    unique_ptr<sql::PreparedStatement> statement{connection->prepareStatement
-            (statement_str)};
+    unique_ptr<sql::PreparedStatement> statement{connection->prepareStatement(statement_str)};
 
     for (unsigned int i = 1; i <= column_name.size(); ++i) {
         statement->setString(i, text_inserted[i - 1]);

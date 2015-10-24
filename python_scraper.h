@@ -12,13 +12,14 @@ using std::string;
 
 class python_scraper {
 public:
-    python_scraper(char* name, char* func, char* link);
+    python_scraper(const char* link);
     ~python_scraper();
+    string scrape();
 private:
     PyObject *pName, *pModule, *pDict, *pFunc;
     PyObject *pLink, *pValue;
 
-    string scrape();
+
 
 
 

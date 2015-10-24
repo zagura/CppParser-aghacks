@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <thread>
 
 
 using std::string;
