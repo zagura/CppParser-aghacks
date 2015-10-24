@@ -15,17 +15,11 @@ sql_manager::~sql_manager() {
     delete connection;
 }
 
-const string sql_manager::get_row_by_number(const string line) {
+const string sql_manager::get_row_by_line_number(const string line, const string column_name) {
     unique_ptr<sql::Statement> statement {connection->createStatement()};
-//    unique_ptr<sql::PreparedStatement> statement {
-//            connection->prepareStatement("SELECT url FROM restaurants ORDER BY updated_at LIMIT ,1")};
     unique_ptr<sql::ResultSet> result { (statement->
-            executeQuery("SELECT url FROM restaurants ORDER BY updated_at LIMIT "+line+",1"))}; //TO DEBUG
+            executeQuery("SELECT "+column_name+"FROM restaurants ORDER BY updated_at LIMIT "+line+",1"))}; //TO DEBUG
     return result->getString("url").asStdString();
-
-
-
-
 }
 
 void sql_manager::insert_row(const string &column_name, const string &text_inserted) {
