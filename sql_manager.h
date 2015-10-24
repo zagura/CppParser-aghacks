@@ -7,9 +7,14 @@
 
 #include <mysql++/mysql++.h>
 #include <mysql_driver.h>
+#include <prepared_statement.h>
+#include <statement.h>
 #include <string>
+#include <memory>
+
 
 using std::string;
+using std::unique_ptr;
 
 class sql_manager {
 private:
@@ -18,7 +23,7 @@ private:
     sql_manager();
     ~sql_manager();
 
-    string& get_row_by_number(const int line);
+    const string get_row_by_number(const string line);
     void insert_row(const string& column_name, const string& text_inserted);
 
     sql::mysql::MySQL_Driver*driver;
