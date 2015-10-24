@@ -23,8 +23,8 @@ private:
     sql_manager();
     ~sql_manager();
 
-    const string get_row_by_line_number(const string line, const string column_name);
-    void insert_row(const string& column_name, const string& text_inserted);
+    const string get_row_by_line_number(const string line, const string column_name, const string table_name);
+    void insert_row(const string table_name,const string column_name, const string &text_inserted);
 
     sql::mysql::MySQL_Driver*driver;
     sql::Connection*connection;
