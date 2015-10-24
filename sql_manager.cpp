@@ -20,7 +20,8 @@ sql_manager::~sql_manager() {
 }
 const string sql_manager::get_column_by_line_number(const string line, const string column_name, const string table_name) {
     unique_ptr<sql::Statement> statement {connection->createStatement()};
-    string statement_str {"SELECT "+column_name+" FROM "+table_name+" ORDER BY updated_at limit "+line+",1"};
+    string statement_str {"SELECT "+column_name+" FROM "+table_name+" ORDER BY updated_at limit "+line+","
+                          +std::to_string(stoi(line)+1)};
     unique_ptr<sql::ResultSet> result { (statement->executeQuery(statement_str))};
 
     if(result->next())
