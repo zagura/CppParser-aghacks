@@ -22,7 +22,6 @@ extern string split_with_char(vector<string> list, char character = {' '});
 
 class sql_manager {
 private:
-public:
     friend class sql_model;
 
     sql_manager();
@@ -37,6 +36,7 @@ public:
     const string database_address;
     const string database_username;
     const string database_password;
+    const string database_name;
 };
 
 
