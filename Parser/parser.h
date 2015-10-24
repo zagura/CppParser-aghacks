@@ -12,10 +12,10 @@ using std::string;
 
 class parser {
 public:
-    parser(string content);
-    string get_unformatted_text();
-    vector <string> get_meals();
-    ~parser();
+    parser(string content) {};
+//    string get_unformatted_text();
+//    vector <string> get_meals();
+//    ~parser();
     void parse_html(string text);
 };
 

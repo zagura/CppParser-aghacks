@@ -1,0 +1,19 @@
+(super |extra |ekstra |mega |specjalna |specjalne |specjalny)?menu dnia
+(super |extra |ekstra |mega |specjalna |specjalne |specjalny)?danie|a( dnia| tygodnia| tygodniowa)?
+(super |extra |ekstra |mega |specjalna |specjalne |specjalny)?oferta|y( dnia| tygodnia| tygodniowa)?
+(super |extra |ekstra |mega |specjalna |specjalne |specjalny)?promocja|e( dnia| tygodnia)?
+(super |extra |ekstra |mega |specjalna |specjalne |specjalny)?(zupa|obiad|kolacja|sniadanie|zestaw)( dnia| tygodnia)?
+tylko
+limitowan(y|a|e)
+(super)?gratis
+promocyjny|a|e( zestaw| obiad| kolacja| sniadanie)
+tydzien
+tygodnia
+(daily )?offer(s?)
+discount(s?)
+bargain(s?)
+w dniu dzisiejszym
+w tym tygodniu
+dzisiaj
+w ofercie
+z okazji

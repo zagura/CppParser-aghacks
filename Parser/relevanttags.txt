@@ -1,0 +1,11 @@
+<p>(.*?)</p>
+<div class.*?>.*?<span class.*?>(.*?)</span>.*?</div>
+<h\d*>(.*?)</h\d*>
+<header>(.*?)</header>
+<ol>(.*?)</ol>
+<ul>(.*?)</ul>
+<dl>(.*?)</dl>
+<table>(.*?)</table>
+<tr>(.*?)</tr>
+<td>(.*?)</td>
+<li>(.*?)</li>
