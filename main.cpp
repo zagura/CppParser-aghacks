@@ -51,7 +51,7 @@ void acquire_url()
             lock.unlock();
             url_condition.notify_one();
 
-//        thread t {scrape_webpage, url.c_str()};
+        thread t {scrape_webpage, url.c_str()};
     }
 }
 void scrape_webpage(const char* link )
