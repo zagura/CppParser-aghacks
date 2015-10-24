@@ -24,14 +24,11 @@ class sql_model {
 public:
     sql_model();
     ~sql_model();
-    string get_next_url_address(); //dodaj mutex
-    bool insert_formatted_text(const vector<string>& formatted_text); //tez
-    bool insert_unformatted_text(const string& unformatted_text); //tu tez
+    string get_next_url_address();
+    void insert_formatted_text(const vector<string>& formatted_text);
+    void insert_unformatted_text(const string& unformatted_text);
     int get_rows_number();
 private:
-    static mutex get_url_lck;
-    static mutex insert_text_lck;
-    static condition_variable get_url_condition;
     int update_rows_number();
     int row_counter;
     int rows_number;

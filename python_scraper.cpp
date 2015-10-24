@@ -12,7 +12,7 @@ python_scraper::python_scraper(const char *link) {
     PyList_Append(sysPath, PyString_FromString("."));
     PyObject* pName = PyString_FromString(name);
     if(pName == NULL) throw exception_scraper::bad_name(pName);
-    this->pModule = PyImport_Import(PyString_FromString(name));
+    this->pModule = PyImport_Import(pName);
     if(pModule == NULL) throw exception_scraper::bad_module((void*)pModule);
     this->pFunc = PyObject_GetAttrString(pModule, func);
     if(pFunc == NULL) throw exception_scraper::bad_function(pFunc);

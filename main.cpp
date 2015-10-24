@@ -17,7 +17,7 @@ using namespace std::chrono;
 
 void acquire_url();
 void load_url_address();
-void scrape_webpage();
+void scrape_webpage(const char* link );
 
 
 queue<string> url_addresses{};
@@ -31,8 +31,9 @@ void load_url_address()
         string result = model.get_next_url_address();
         unique_lock<mutex> lock {url_mutex};
         url_addresses.push(result);
+        lock.unlock();
         url_condition.notify_one();
-        if(url_addresses.size() >= model.get_rows_number()) {
+        while(url_addresses.size() >= model.get_rows_number()) {
             url_condition.wait(lock);
         }
     }
@@ -42,41 +43,38 @@ void acquire_url()
 {
     string url;
     while(true) {
-        unique_lock<mutex> lock{};
+        unique_lock<mutex> lock{url_mutex};
         while(url_addresses.empty()) {
-            url_condition.wait(lock);
+                url_condition.wait(lock);
         }
             url = url_addresses.front();
             url_addresses.pop();
-            lock.unlock();
+//            if(lock.owns_lock()) {
+                lock.unlock();
+//            }
             url_condition.notify_one();
 
-//        thread t {scrape_webpage, url.c_str()};
+        thread t {&scrape_webpage, url.c_str()};
+        t.detach();
     }
 }
-void scrape_webpage(const char* link )
+void scrape_webpage(const char* link)
 {
-    python_scraper scraper(link);
+    string str = link;
+    python_scraper scraper(str.c_str());
     string result = scraper.scrape();
+
+    //call parser(result)
 }
 
 int main(int argc, char** argv)
 {
 
-//    while(true) {
-//        promise<string> url_promise;
-//        auto url_future = url_promise.get_future();
-//        thread url_thread {get_url_address, url_promise};
-//        url_thread.join();
-//        string url_result = url_future.get();
-//
-//        promise<string> scraper_promise;
-//        auto scraper_future = scraper_promise.get_future();
-//        thread scraper_thread {scrape_webpage, argv[1], argv[2],url_result};
-//
-//        this_thread::sleep_for(duration_cast<milliseconds>(seconds(4)));
-//
-//    }
+    thread t1 {load_url_address};
+    this_thread::sleep_for(std::chrono::milliseconds(300));
+    thread t2 {acquire_url};
+    t1.join();
+    t2.join();
 
     return 0;
 }
