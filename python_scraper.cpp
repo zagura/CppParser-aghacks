@@ -4,7 +4,7 @@
 
 #include "python_scraper.h"
 
-python_scraper::python_scraper(const char *name,const char *func,const char *link) {
+python_scraper::python_scraper(const char *link) {
     Py_Initialize();
     char program_name[] = "getpage.py";
     Py_SetProgramName(program_name);
