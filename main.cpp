@@ -53,7 +53,6 @@ void acquire_url()
             lock.unlock();
             url_condition.notify_one();
 
-//        thread t {scrape_webpage, url.c_str()};
     }
 }
 void scrape_webpage(const char* link )
@@ -82,26 +81,5 @@ int main(int argc, char** argv)
 //        this_thread::sleep_for(duration_cast<milliseconds>(seconds(4)));
 //
 //    }
-    char*link="http://www.biesiada-krakow.pl";
-    python_scraper scraper(link);
-    string result = scraper.scrape();
-//    cout << result;
-//    string result = "<h1>\n"
-//            "\t\t\t\t\t\t<p>Witamy na naszej stronie</p>\n"
-//            "</h1><p>Miło jest nam Państwa powitać w <strong>PIU RESTAURACJA &#038; PIZZERIA</strong></p>\n"
-//            "<p>Stary Płaszów – Rybitwy.</p>\n"
-//            "<p>Dołożymy wszelkich starań, aby na Państwa twarzach zagościł uśmiech. Zaskoczymy Państwa wspaniałym smakiem i świeżością naszych potraw oraz miłą, ponadprzeciętną obsługą. Dysponujemy salą dla około 35 osób w której jesteśmy w stanie zorganizować:</p>\n"
-//            "<ul>\n"
-//            "<li>Chrzciny, komunie</li>\n"
-//            "<li>Przyjęcia imieninowe, urodzinowe</li>\n"
-//            "<li>Urodziny dla maluchów (również z animatorem)</li>\n"
-//            "<li>Spotkania firmowe (małe szkolenia, prezentacje itp.)</li>\n"
-//            "<li>Spotkania wigilijne</li>\n"
-//            "<li>Kompleksowo organizujemy catering (szczegóły w zakładce „przyjęcia okolicznościowe” i „dla firm”).</li>\n"
-//            "</ul>\n"
-//            "<p>Jesteśmy do Państwa dyspozycji.</p>\n"
-//            "<p>Zapraszamy</p>";
-    ai_parser par(result);
-    cout << par.get_text();
     return 0;
 }
